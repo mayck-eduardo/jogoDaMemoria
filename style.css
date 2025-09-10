@@ -28,4 +28,6 @@ body {
     background-color: gray;
     cursor: pointer;
      user-select: none;
+     background-position: center;
+     background-size: cover;
 }

@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    //array 6 imagens 12 cartas, ex. carta1 = img3 essa informção está em paresCartas agora vamos armazenar o caminho das 6 imagens
+    //armazena o caminho das 6 imagens
     const imagens = {
         1: "imagens/img1.png",
         2: "imagens/img2.png",
@@ -43,20 +43,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (let i = 0; i < carta.length; i++) {
         carta[i].addEventListener("click", function () {
+            // impedir clicar em cartas já encontradas
+            if (carta[i].classList.contains("encontrado") || carta[i].classList.contains("virar")) {
+                return;
+            }
             // permitir virar apenas duas cartas
             if (document.querySelectorAll(".virar").length < 2) {
-                carta[i].classList.toggle("virar");
+                carta[i].classList.add("virar");
                 console.log("Clicou na carta " + (i + 1));
-
+    
                 carta[i].style.backgroundColor = "lightgray";
                 carta[i].style.backgroundImage = "url('" + imagens[matriz[i][0]] + "')";
-
+    
             }
             //logica para verificar cartas iguais
             if (document.querySelectorAll(".virar").length === 2) {
                 let cartasViradas = document.querySelectorAll(".virar");
-                if (cartasViradas[0].style.backgroundImage === cartasViradas[1].style.backgroundImage) {
+                const idx1 = Array.from(carta).indexOf(cartasViradas[0]);
+                const idx2 = Array.from(carta).indexOf(cartasViradas[1]);
+                if (matriz[idx1][0] === matriz[idx2][0]) {
                     console.log("Encontrou um par!");
+                    // marcar como encontrado, para não poder clicar novamente nem resetar
+                    cartasViradas.forEach(c => {
+                        c.classList.remove("virar");
+                        c.classList.add("encontrado");
+                    });
                 } else {
                     console.log("Não é um par.");
                     setTimeout(function () {
@@ -64,10 +75,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     }, 1000);
                 }
             }
-
+    
         });
-
-
+    
+    
     }
 
 
@@ -77,9 +88,17 @@ let carta = document.getElementsByClassName("carta");
 
 //reset cards menos a carta virada
 function resetCards() {
-    for (let i = 0; i < carta.length; i++) {
-        carta[i].classList.remove("virar");
-        carta[i].style.backgroundColor = "gray";
-        carta[i].style.backgroundImage = "";
+    const cartasViradas = document.querySelectorAll(".virar");
+    if (cartasViradas.length === 2) {
+        const idx1 = Array.from(carta).indexOf(cartasViradas[0]);
+        const idx2 = Array.from(carta).indexOf(cartasViradas[1]);
+        if (matriz[idx1][0] !== matriz[idx2][0]) {
+            // Se não forem iguais, desvira
+            cartasViradas.forEach(c => {
+                c.classList.remove("virar");
+                c.style.backgroundColor = "gray";
+                c.style.backgroundImage = "";
+            });
+        }
     }
 }

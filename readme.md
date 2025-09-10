@@ -6,7 +6,6 @@ Este é um projeto simples de Jogo da Memória desenvolvido em HTML, CSS e JavaS
 
 ```
 index.html
-notas.js
 script.js
 style.css
 

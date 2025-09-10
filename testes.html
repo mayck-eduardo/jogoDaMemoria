@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta charset="UTF-8"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Document</title>
 </head>
+
 <body style="background-color: black;">
     <script>
-            //matriz 12 cartas com as 12 imagens
-    function criarMatriz() {
-        const matriz = [];
-        const contagem = {};
+        //matriz 12 cartas com as 12 imagens
+        function criarMatriz() {
+            const matriz = [];
+            const contagem = {};
 
-        // Inicializa a contagem de repetições para cada número de 1 a 6
-        for (let i = 1; i <= 6; i++) {
-            contagem[i] = 0;
+            // Inicializa a contagem de repetições para cada número de 1 a 6
+            for (let i = 1; i <= 6; i++) {
+                contagem[i] = 0;
+            }
+
+            for (let i = 1; i <= 12; i++) {
+                let numeroAleatorio;
+                do {
+                    numeroAleatorio = Math.floor(Math.random() * 6) + 1;
+                } while (contagem[numeroAleatorio] >= 2); // Repete se o número já tem 2 repetições
+
+                contagem[numeroAleatorio]++;
+                matriz.push([i, numeroAleatorio]);
+            }
+
+            return matriz;
         }
-
-        for (let i = 1; i <= 12; i++) {
-            let numeroAleatorio;
-            do {
-                numeroAleatorio = Math.floor(Math.random() * 6) + 1;
-            } while (contagem[numeroAleatorio] >= 2); // Repete se o número já tem 2 repetições
-
-            contagem[numeroAleatorio]++;
-            matriz.push([i, numeroAleatorio]);
-        }
-
-        return matriz;
-    }
+        console.log(criarMatriz());
 
 
 
     </script>
 </body>
+
 </html>

@@ -9,15 +9,15 @@ index.html
 notas.js
 script.js
 style.css
-testes.html
+
 imagens/
     img1.png
-v1.0/
-    index.html
-    script.js
-    style.css
-    imagens/
-        1.png
+    img2.png
+    img3.png
+    img4.png
+    img5.png
+    img6.png
+
 ```
 
 ## Como funciona

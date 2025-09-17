@@ -5,9 +5,10 @@ const contagem = {};
 
 // Inicializa a contagem de repetições para cada número de 1 a 6
 for (let i = 1; i <= 6; i++) {
-    contagem[i] = 0;
+    contagem[i] = 0; // criamos uma matriz para contar as repetições, ex: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
 }
 
+//aqui sorteia os números para as cartas
 for (let i = 1; i <= 12; i++) {
     let numeroAleatorio;
     do {
@@ -19,14 +20,14 @@ for (let i = 1; i <= 12; i++) {
 }
 
 
-
+//espera a página carregar e usamos o DOM para manipular os elementos HTML
 document.addEventListener("DOMContentLoaded", function () {
     //criando as 12 cartas com divs
     for (let i = 1; i <= 12; i++) {
         let div = document.createElement("div");
         div.className = "carta";
         div.id = "carta" + i;
-        div.innerHTML = "carta" + i;
+        // div.innerHTML = "carta" + i;
         document.querySelector(".container-fluid").appendChild(div);
     }
 
@@ -46,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // impedir clicar em cartas já encontradas
             if (carta[i].classList.contains("encontrado") || carta[i].classList.contains("virar")) {
                 return;
-            }
+            } 
             // permitir virar apenas duas cartas
             if (document.querySelectorAll(".virar").length < 2) {
                 carta[i].classList.add("virar");

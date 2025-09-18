@@ -1,3 +1,30 @@
+let nome = prompt("Digite seu nome: ");
+//inicia cronometro
+let segundos = 0;
+let minutos = 0;
+let horas = 0;
+let cronometro;
+
+//incrementamos um cronometro a cada segundo para calcular a pontuação
+function startCronometro() {
+    cronometro = setInterval(function () {
+        segundos++;
+        if (segundos === 60) {
+            segundos = 0;
+            minutos++;
+            if (minutos === 60) {
+                minutos = 0;
+                horas++;
+            }
+        }
+        document.getElementById("cronometro").innerHTML = "Tempo: " + horas + "h " + minutos + "m " + segundos + "s";
+    }, 1000);
+    tempoEmSegundos = segundos + (minutos * 60) + (horas * 3600);
+    // chama a função de pontuação para atualizar a pontuação a cada segundo
+    pontuacao(tempoEmSegundos);
+}
+startCronometro();
+
 jogoAberto = true;
 
 const matriz = [];
@@ -42,20 +69,28 @@ document.addEventListener("DOMContentLoaded", function () {
         6: "imagens/img6.png"
     };
 
-    for (let i = 0; i < carta.length; i++) {
+    for (let i = 0; i < carta.length; i++) { 
         carta[i].addEventListener("click", function () {
-            // impedir clicar em cartas já encontradas
-            if (carta[i].classList.contains("encontrado") || carta[i].classList.contains("virar")) {
+            //verificação para ver se o jogo está aberto
+            if (!jogoAberto) {
                 return;
-            } 
+            } else if (document.querySelectorAll(".encontrado").length === 12) {
+                alert("Parabéns " + nome + "! Você encontrou todos os pares!");
+                jogoAberto = false;
+            }
+            // impedir clicar em cartas já encontradas (se a carta já foi encontrada ou está virada ele não faz nada)
+            if (carta[i].classList.contains("encontrado") || carta[i].classList.contains("virar")) {
+                //adicionamos uma classe "encontrado" para as cartas que já foram encontradas, assim não podemos clicar nelas novamente
+                return;
+            }
             // permitir virar apenas duas cartas
             if (document.querySelectorAll(".virar").length < 2) {
                 carta[i].classList.add("virar");
                 console.log("Clicou na carta " + (i + 1));
-    
+
                 carta[i].style.backgroundColor = "lightgray";
                 carta[i].style.backgroundImage = "url('" + imagens[matriz[i][0]] + "')";
-    
+
             }
             //logica para verificar cartas iguais
             if (document.querySelectorAll(".virar").length === 2) {
@@ -76,10 +111,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     }, 1000);
                 }
             }
-    
+
         });
-    
-    
+
+
     }
 
 
@@ -102,4 +137,24 @@ function resetCards() {
             });
         }
     }
+}
+
+
+function pontuacao(tempoEmSegundos) {
+    let pontos = 0;
+
+    // Recupera jogadores antigos do localStorage ou inicializa como array vazio
+    let jogadores = JSON.parse(localStorage.getItem("jogadores")) || [];
+
+    // Adiciona novo jogador ao array
+    jogadores.push({ nome: nome, pontos: pontos });
+    console.log(jogadores);
+
+    // Salva o array atualizado no localStorage
+    localStorage.setItem("jogadores", JSON.stringify(jogadores));
+
+    // Exibe os jogadores e suas pontuações
+    jogadores.forEach(jogador => {
+        document.getElementById("ranking").innerText += `${jogador.pontos}pts - ${jogador.nome}\n`;
+    });
 }

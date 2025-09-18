@@ -7,27 +7,35 @@
     <title>Document</title>
 </head>
 
-<body style="background-color: black;">
+<body style="background-color: black; color: #FFFFFF;">
+    <h1>ranking</h1>
+    <span id="ranking"> </span>
     <script>
-    // array com nome e pontuação 
-    let nome = prompt("Digite seu nome: ");
-    let pontos = 0;
+        // array com nome e pontuação 
+        let nome = prompt("Digite seu nome: ");
+        let pontos = 0;
 
-    // Recupera jogadores antigos do localStorage ou inicializa como array vazio
-    let jogadores = JSON.parse(localStorage.getItem("jogadores")) || [];
+        // Recupera jogadores antigos do localStorage ou inicializa como array vazio
+        let jogadores = JSON.parse(localStorage.getItem("jogadores")) || [];
 
-    // Adiciona novo jogador ao array
-    jogadores.push({ nome: nome, pontos: pontos });
-    console.log(jogadores);
+        // Adiciona novo jogador ao array
+        jogadores.push({ nome: nome, pontos: pontos });
+        console.log(jogadores);
 
-    // Salva o array atualizado no localStorage
-    localStorage.setItem("jogadores", JSON.stringify(jogadores));
+        // Salva o array atualizado no localStorage
+        localStorage.setItem("jogadores", JSON.stringify(jogadores));
 
-    // Exibe os jogadores e suas pontuações
-    jogadores.forEach(jogador => {
-        document.write(`Nome: ${jogador.nome} - Pontos: ${jogador.pontos}<br>`);
-    });
+        // Exibe os jogadores e suas pontuações
+        jogadores.forEach(jogador => {
+            document.getElementById("ranking").innerText += `${jogador.pontos}pts - ${jogador.nome}\n`;
+        });
+
+        // limpar todas as entradas do localStorage
+        // localStorage.clear();
+        
     </script>
+        
+   
 </body>
 
 </html>

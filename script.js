@@ -1,29 +1,8 @@
 let nome = prompt("Digite seu nome: ");
-//inicia cronometro
-let segundos = 0;
-let minutos = 0;
-let horas = 0;
-let cronometro;
 
-//incrementamos um cronometro a cada segundo para calcular a pontuação
-function startCronometro() {
-    cronometro = setInterval(function () {
-        segundos++;
-        if (segundos === 60) {
-            segundos = 0;
-            minutos++;
-            if (minutos === 60) {
-                minutos = 0;
-                horas++;
-            }
-        }
-        document.getElementById("cronometro").innerHTML = "Tempo: " + horas + "h " + minutos + "m " + segundos + "s";
-    }, 1000);
-    tempoEmSegundos = segundos + (minutos * 60) + (horas * 3600);
-    // chama a função de pontuação para atualizar a pontuação a cada segundo
-    pontuacao(tempoEmSegundos);
-}
-startCronometro();
+iniciarCronometro();
+
+
 
 jogoAberto = true;
 
@@ -45,6 +24,7 @@ for (let i = 1; i <= 12; i++) {
     contagem[numeroAleatorio]++;
     matriz.push([numeroAleatorio]);
 }
+
 
 
 //espera a página carregar e usamos o DOM para manipular os elementos HTML
@@ -69,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
         6: "imagens/img6.png"
     };
 
-    for (let i = 0; i < carta.length; i++) { 
+    for (let i = 0; i < carta.length; i++) {
         carta[i].addEventListener("click", function () {
             //verificação para ver se o jogo está aberto
             if (!jogoAberto) {
@@ -77,6 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (document.querySelectorAll(".encontrado").length === 12) {
                 alert("Parabéns " + nome + "! Você encontrou todos os pares!");
                 jogoAberto = false;
+                pontuacao(intervalo);
+                pararCronometro();
+                return;
             }
             // impedir clicar em cartas já encontradas (se a carta já foi encontrada ou está virada ele não faz nada)
             if (carta[i].classList.contains("encontrado") || carta[i].classList.contains("virar")) {
@@ -120,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+
 let carta = document.getElementsByClassName("carta");
 
 //reset cards menos a carta virada
@@ -139,8 +123,29 @@ function resetCards() {
     }
 }
 
+let segundos = 0;
+let intervalo;
 
-function pontuacao(tempoEmSegundos) {
+function iniciarCronometro() {
+  intervalo = setInterval(() => {
+    segundos++;
+    console.log(`Segundos: ${segundos}`);
+    // Actualizar a UI com o valor de segundos
+  }, 1000); // Executa a cada 1000ms (1 segundo)
+}
+
+function pararCronometro() {
+  clearInterval(intervalo);
+}
+
+// Para iniciar o cronómetro:
+// iniciarCronometro();
+
+// Para parar o cronómetro:
+// pararCronometro();
+
+
+function pontuacao(intervalo) {
     let pontos = 0;
 
     // Recupera jogadores antigos do localStorage ou inicializa como array vazio

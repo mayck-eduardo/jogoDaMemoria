@@ -9,32 +9,24 @@
 
 <body style="background-color: black;">
     <script>
-        //matriz 12 cartas com as 12 imagens
-        function criarMatriz() {
-            const matriz = [];
-            const contagem = {};
+    // array com nome e pontuação 
+    let nome = prompt("Digite seu nome: ");
+    let pontos = 0;
 
-            // Inicializa a contagem de repetições para cada número de 1 a 6
-            for (let i = 1; i <= 6; i++) {
-                contagem[i] = 0;
-            }
+    // Recupera jogadores antigos do localStorage ou inicializa como array vazio
+    let jogadores = JSON.parse(localStorage.getItem("jogadores")) || [];
 
-            for (let i = 1; i <= 12; i++) {
-                let numeroAleatorio;
-                do {
-                    numeroAleatorio = Math.floor(Math.random() * 6) + 1;
-                } while (contagem[numeroAleatorio] >= 2); // Repete se o número já tem 2 repetições
+    // Adiciona novo jogador ao array
+    jogadores.push({ nome: nome, pontos: pontos });
+    console.log(jogadores);
 
-                contagem[numeroAleatorio]++;
-                matriz.push([i, numeroAleatorio]);
-            }
+    // Salva o array atualizado no localStorage
+    localStorage.setItem("jogadores", JSON.stringify(jogadores));
 
-            return matriz;
-        }
-        console.log(criarMatriz());
-
-
-
+    // Exibe os jogadores e suas pontuações
+    jogadores.forEach(jogador => {
+        document.write(`Nome: ${jogador.nome} - Pontos: ${jogador.pontos}<br>`);
+    });
     </script>
 </body>
 

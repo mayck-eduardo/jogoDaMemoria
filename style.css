@@ -31,3 +31,12 @@ body {
      background-position: center;
      background-size: cover;
 }
+
+
+#ranking {
+    margin-top: 20px;
+    /* fixando ele na lateral esquerda */
+    position: absolute;
+    left: 20px;
+    top: 60px;
+}

@@ -10,8 +10,8 @@ const contagem = {};
 // Função para verificar vitória
 function verificarVitoria() {
     if (document.querySelectorAll(".encontrado").length === 12) {
-        let nome = prompt("Digite seu nome:");
-        alert(`Parabéns ${nome}! Você encontrou todos os pares!`);
+
+        // alert(`Parabéns ${nome}! Você encontrou todos os pares!`);
         jogoAberto = false;
         calcularPontuacao?.();
     }
@@ -37,8 +37,7 @@ for (let i = 1; i <= 12; i++) {
 // O código que verifica vitória está na função verificarVitoria, mas ela nunca é chamada após encontrar um par.
 // Para corrigir, chame verificarVitoria() após marcar um par como encontrado:
 
-// No trecho dentro do click, após cartasViradas.forEach(...), adicione:
-verificarVitoria();
+
 document.addEventListener("DOMContentLoaded", function () {
     //criando as 12 cartas com divs
     for (let i = 1; i <= 12; i++) {
@@ -48,8 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // div.innerHTML = "carta" + i;
         document.querySelector(".container-fluid").appendChild(div);
     }
-
-
+    
+    
     //armazena o caminho das 6 imagens
     const imagens = {
         1: "imagens/img1.png",
@@ -59,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
         5: "imagens/img5.png",
         6: "imagens/img6.png"
     };
-
+    
     for (let i = 0; i < carta.length; i++) {
         console.log(carta.length)
         carta[i].addEventListener("click", function () {
@@ -82,10 +81,10 @@ document.addEventListener("DOMContentLoaded", function () {
             if (document.querySelectorAll(".virar").length < 2) {
                 carta[i].classList.add("virar");
                 // console.log("Clicou na carta " + (i + 1));
-console.log(carta.length)
+                console.log(carta.length)
                 carta[i].style.backgroundColor = "lightgray";
                 carta[i].style.backgroundImage = "url('" + imagens[matriz[i][0]] + "')";
-
+                
             }
             //logica para verificar cartas iguais
             if (document.querySelectorAll(".virar").length === 2) {
@@ -98,6 +97,7 @@ console.log(carta.length)
                     cartasViradas.forEach(c => {
                         c.classList.remove("virar");
                         c.classList.add("encontrado");
+                        verificarVitoria();
                     });
                 } else {
                     // console.log("Não é um par.");
@@ -106,13 +106,13 @@ console.log(carta.length)
                     }, 1000);
                 }
             }
-
+            
         });
-
-
+        
+        
     }
-
-
+    
+    
 });
 
 

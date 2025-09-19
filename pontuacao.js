@@ -1,11 +1,6 @@
-function mayck() {
-    alert("TESTE");
-
-}
-
 let segundos = 60*5; // Defina o tempo inicial do temporizador
 let intervalo;
-const MULTIPLICADOR = 10; // Valor para multiplicar os segundos restantes
+const MULTIPLICADOR = 3; // Valor para multiplicar os segundos restantes
 iniciarTemporizador();
 function iniciarTemporizador() {
     intervalo = setInterval(() => {
@@ -25,8 +20,8 @@ function pararTemporizador() {
 }
 
 function calcularPontuacao() {
-    let pontos = segundos * MULTIPLICADOR;
-    let nome = prompt("Digite seu nome:");
+    let pontos = segundos ^ MULTIPLICADOR; // Exemplo: multiplicar os segundos restantes por 10
+    let nome = prompt("Para calcular pontos, digite seu nome:");
     let jogadores = JSON.parse(localStorage.getItem("jogadores")) || [];
     jogadores.push({ nome: nome, pontos: pontos });
     localStorage.setItem("jogadores", JSON.stringify(jogadores));

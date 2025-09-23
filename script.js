@@ -9,12 +9,11 @@ const contagem = {};
 // Função para verificar vitória
 function verificarVitoria() {
     if (document.querySelectorAll(".encontrado").length === 12) {
-
-        // alert(`Parabéns ${nome}! Você encontrou todos os pares!`);
         jogoAberto = false;
         calcularPontuacao?.();
     }
 }
+// essa contagem é uma matriz 2x6
 for (let i = 1; i <= 6; i++) {
     contagem[i] = 0; // criamos uma matriz para contar as repetições, ex: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
 }

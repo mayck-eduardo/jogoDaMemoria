@@ -10,11 +10,9 @@ iniciarTemporizador();
         intervalo = setInterval(() => {
             segundos--;
             // console.log(`Segundos restantes: ${segundos}`);
-            // Atualizar a UI com o valor de segundos
 
             if (segundos <= 0) {
                 pararTemporizador();
-
             }
         }, 1000);
     }
@@ -24,7 +22,7 @@ iniciarTemporizador();
     }
 
     function calcularPontuacao() {
-        let pontos = segundos ^ MULTIPLICADOR; // Exemplo: multiplicar os segundos restantes por 10
+        let pontos = segundos ^ MULTIPLICADOR;
         let nome = prompt("Para calcular pontos, digite seu nome:");
         let jogadores = JSON.parse(localStorage.getItem("jogadores")) || [];
         jogadores.push({ nome: nome, pontos: pontos });
@@ -36,6 +34,10 @@ iniciarTemporizador();
             document.getElementById("ranking").innerText += `${jogador.pontos}pts - ${jogador.nome}\n`;
         });
         alert(`Parabéns ${nome}! Sua pontuação é: ${pontos} pontos.`);
+        //parar todos os eventos de clique nas cartas
+        for (let i = 0; i < carta.length; i++) {
+            carta[i].style.pointerEvents = "none";
+        }   
     }
 
 // Para iniciar o temporizador:

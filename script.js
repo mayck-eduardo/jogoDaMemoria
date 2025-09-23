@@ -38,12 +38,15 @@ for (let i = 1; i <= 12; i++) {
 
 document.addEventListener("DOMContentLoaded", function () {
     //criando as 12 cartas com divs
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 4; i++) {
+        for (let j = 0; j < 3; j++) {
         let div = document.createElement("div");
         div.className = "carta";
         div.id = "carta" + i;
         // div.innerHTML = "carta" + i;
         document.querySelector(".container-fluid").appendChild(div);
+        } let br = document.createElement("br");
+        document.querySelector(".container-fluid").appendChild(br);
     }
     
     

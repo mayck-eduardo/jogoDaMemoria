@@ -1,5 +1,4 @@
 
-
 jogoAberto = true;
 
 const matriz = [];
@@ -51,12 +50,12 @@ document.addEventListener("DOMContentLoaded", function () {
     
     //armazena o caminho das 6 imagens
     const imagens = {
-        1: "imagens/img1.png",
-        2: "imagens/img2.png",
-        3: "imagens/img3.png",
-        4: "imagens/img4.png",
-        5: "imagens/img5.png",
-        6: "imagens/img6.png"
+        1: "imagens/img1.jpg",
+        2: "imagens/img2.jpg",
+        3: "imagens/img3.jpg",
+        4: "imagens/img4.jpg",
+        5: "imagens/img5.jpg",
+        6: "imagens/img6.jpg"
     };
     
     for (let i = 0; i < carta.length; i++) {
